@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 import praw
-from praw import reddit
+from praw import Reddit
 from praw.models import Submission, Subreddit, Comment
 
 load_dotenv()
