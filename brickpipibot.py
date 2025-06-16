@@ -8,16 +8,23 @@ load_dotenv()
 
 CLIENT = os.getenv("CLIENT_ID")
 SECRET = os.getenv("CLIENT_SECRET")
-USERNAME = os.getenv("USERNAME")
-PASSWORD = os.getenv("PASSWORD")
+BOT_USERNAME = os.getenv("BOT_USERNAME")
+BOT_PASSWORD = os.getenv("BOT_PASSWORD")
+TOKEN = os.getenv("REFRESH_TOKEN")
 
 reddit=praw.Reddit(
-    user_agent="BrickPipiBot"
-    client_id=CLIENT
-    client_secret=SECRET
-    username=USERNAME
-    password=PASSWORD
+    client_id=CLIENT,
+    client_secret=SECRET,
+    token=TOKEN,
+    user_agent="BrickPipiBot",
+    redirect_uri="http://localhost:8080",
+    username=BOT_USERNAME,
+    password=BOT_PASSWORD
 )
+
+print(reddit.user.me())
+
+print(reddit.read_only)
 
 subreddit=reddit.subreddit("AnarchyChess")
 forced_moves = ["en passant", "en. passant", "il vaticano"]
@@ -25,7 +32,7 @@ brick_triggers = ["decline", "deny", "deni", "nt forced", "n't forced", "not. fo
 brick_reply = "I will brick your pipi"
 
 def process_comment(comment):
-    normalized_comment=comment.lower()
+    normalized_comment=comment.body.lower()
     for forced_move in forced_moves:
         if forced_move in normalized_comment:
             for brick_trigger in brick_triggers:
