@@ -16,7 +16,7 @@ reddit=praw.Reddit(
     client_id=CLIENT,
     client_secret=SECRET,
     token=TOKEN,
-    user_agent="BrickPipiBot",
+    user_agent="BrickPipiBot v.1.1",
     redirect_uri="http://localhost:8080",
     username=BOT_USERNAME,
     password=BOT_PASSWORD
@@ -28,8 +28,8 @@ print(reddit.read_only)
 
 subreddit=reddit.subreddit("AnarchyChess")
 forced_moves = ["en passant", "il vaticano"]
-brick_triggers = ["decline", "deny", "deni", "nt forced", "n't forced", "not forced"]
-brick_reply = "I will brick your pipi"
+brick_triggers = ["declin", "deny", "deni", "nt forced", "n't forced", "not forced"]
+brick_reply = "*bricks your pipi*"
 
 def process_comment(comment):
     normalized_comment=comment.body.lower()
